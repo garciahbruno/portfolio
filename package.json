@@ -1,0 +1,10 @@
+{
+  "name": "cash-design-climbing-clone",
+  "version": "1.0.0",
+  "private": true,
+  "description": "High-fidelity Cash App Design landing page rebuild with climbing-hold infinite grid",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 4173"
+  }
+}

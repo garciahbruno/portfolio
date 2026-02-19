@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Cash App style landing with infinite climbing-hold grid and full-page dropdown overlays."
+    />
+    <title>Bruno Garcia</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div id="infinite-grid" class="infinite-grid" aria-hidden="true"></div>
+      <div class="edge-vignette" aria-hidden="true"></div>
+
+      <header id="top-bar" class="top-bar" aria-label="Site header">
+        <a class="brand" href="#" aria-label="Bruno Garcia home">
+          <span class="brand-mark" aria-hidden="true">$</span>
+          <span class="brand-label">Bruno Garcia</span>
+        </a>
+
+        <nav class="top-links" aria-label="Primary">
+          <button
+            type="button"
+            class="top-link menu-trigger"
+            data-menu-target="experience"
+            aria-expanded="false"
+            aria-controls="menu-experience"
+          >
+            Experience
+          </button>
+          <button
+            type="button"
+            class="top-link menu-trigger"
+            data-menu-target="projects"
+            aria-expanded="false"
+            aria-controls="menu-projects"
+          >
+            Projects
+          </button>
+          <button
+            type="button"
+            class="top-link menu-trigger"
+            data-menu-target="about"
+            aria-expanded="false"
+            aria-controls="menu-about"
+          >
+            About Me
+          </button>
+        </nav>
+
+        <div class="top-actions" aria-label="External links">
+          <a
+            class="icon-link"
+            href="https://www.linkedin.com/in/brunohg"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5v9.56H3.74V8.5h3.2Zm.2-3.03a1.85 1.85 0 1 1-3.7 0 1.85 1.85 0 0 1 3.7 0Zm3.66 3.03h3.07v1.31h.04c.43-.81 1.48-1.66 3.05-1.66 3.27 0 3.88 2.15 3.88 4.95v4.96h-3.2v-4.4c0-1.05-.02-2.4-1.46-2.4-1.47 0-1.7 1.15-1.7 2.33v4.47h-3.2V8.5h-.48Z"/>
+            </svg>
+          </a>
+          <a
+            class="icon-link"
+            href="https://github.com/garciahbruno"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a10 10 0 0 0-3.16 19.48c.5.1.68-.21.68-.47v-1.66c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.1-1.45-1.1-1.45-.9-.61.07-.6.07-.6 1 .08 1.52 1.03 1.52 1.03.88 1.5 2.32 1.07 2.88.82.09-.64.34-1.07.62-1.31-2.22-.25-4.56-1.11-4.56-4.95 0-1.1.4-2.01 1.03-2.72-.1-.25-.45-1.28.1-2.67 0 0 .84-.27 2.75 1.04a9.44 9.44 0 0 1 5 0c1.9-1.31 2.75-1.04 2.75-1.04.54 1.39.2 2.42.1 2.67.64.7 1.03 1.61 1.03 2.72 0 3.85-2.34 4.7-4.57 4.95.36.31.67.92.67 1.86v2.75c0 .26.18.58.69.47A10 10 0 0 0 12 2Z"/>
+            </svg>
+          </a>
+          <a
+            class="icon-link"
+            href="./assets/BrunoGarcia_Resume.pdf"
+            download="BrunoGarcia_Resume.pdf"
+            aria-label="Download resume"
+            title="Download Resume"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 2h8l4 4v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V7h3.5L13 3.5ZM12 10a1 1 0 0 1 1 1v4.59l1.3-1.3a1 1 0 1 1 1.4 1.42l-3 3a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.42l1.3 1.3V11a1 1 0 0 1 1-1Zm-4 10h8a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2Z"/>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      <div id="menu-overlay" class="menu-overlay" aria-hidden="true">
+        <section
+          id="menu-experience"
+          class="mega-panel"
+          data-menu-panel="experience"
+          role="region"
+          aria-label="Experience"
+        >
+          <div class="mega-lines">
+            <p class="mega-line" style="--stagger: 0">Michigan Medicine</p>
+            <p class="mega-line" style="--stagger: 1">InRiva AI</p>
+            <p class="mega-line" style="--stagger: 2">Clinical Research</p>
+            <p class="mega-line" style="--stagger: 3">Data Products</p>
+          </div>
+
+          <div class="mega-footer">
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Data Analyst</p>
+              <p class="footer-meta">Michigan Medicine · May 2025 - Dec 2025</p>
+              <p class="footer-copy">Analyzed prescription data across 90M+ patients, built analysis-ready SQL/SAS cohorts, and produced publication-grade clinical tables and figures.</p>
+              <ul class="footer-more">
+                <li>Standardized 100K+ pharmacy records into validated patient-level cohort tables.</li>
+                <li>Tracked refill adherence and multi-year utilization trends for active studies.</li>
+              </ul>
+            </article>
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Software Engineer Intern</p>
+              <p class="footer-meta">InRiva AI · Jun 2025 - Aug 2025</p>
+              <p class="footer-copy">Processed CGM datasets for 50+ patients, built summary metrics pipelines, and delivered reusable reporting outputs for downstream clinical analysis.</p>
+              <ul class="footer-more">
+                <li>Resolved timestamp gaps, invalid sensor points, and duplicate glucose readings.</li>
+                <li>Automated per-patient reporting outputs for analytics and clinical review flows.</li>
+              </ul>
+            </article>
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Focus</p>
+              <p class="footer-meta">Healthcare Data + Applied ML</p>
+              <p class="footer-copy">Strong preference for messy real-world data systems, robust cleaning pipelines, and communication-ready analytics for decision-making teams.</p>
+              <ul class="footer-more">
+                <li>Core stack: Python, SQL, Pandas, Matplotlib, and reproducible data workflows.</li>
+                <li>Interests: outcomes research, patient behavior modeling, and product analytics.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="menu-projects"
+          class="mega-panel"
+          data-menu-panel="projects"
+          role="region"
+          aria-label="Projects"
+        >
+          <div class="mega-lines">
+            <p class="mega-line" style="--stagger: 0">Grant Language Filter</p>
+            <p class="mega-line" style="--stagger: 1">COVID Cases Analyses</p>
+            <p class="mega-line" style="--stagger: 2">Camp AG Website</p>
+          </div>
+
+          <div class="mega-footer">
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Grant Language Filter</p>
+              <p class="footer-meta">Python · Jun 2025 - Aug 2025</p>
+              <p class="footer-copy">Scans 1,000+ page NIH proposals for high-risk terms across body text and embedded figures, outputting structured page-level reports.</p>
+              <ul class="footer-more">
+                <li>Combined PDF parsing + keyword matching over prose and figure regions.</li>
+                <li>Outputs flagged snippets with page numbers and contextual evidence.</li>
+              </ul>
+            </article>
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">COVID Cases Analyses</p>
+              <p class="footer-meta">Python, SQLite, APIs · Feb 2025 - Apr 2025</p>
+              <p class="footer-copy">Built a normalized 50-state dataset linking case rates, elections, and demographics, with visualization pipelines for trend interpretation.</p>
+              <ul class="footer-more">
+                <li>Integrated API and scraped sources into a clean county/state relational model.</li>
+                <li>Compared burden by vote share, income quartiles, and demographic composition.</li>
+              </ul>
+            </article>
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Summer Camp Website</p>
+              <p class="footer-meta">HTML, CSS, JavaScript · Aug 2025</p>
+              <p class="footer-copy">Designed and deployed the official Camp AG site for 150+ campers/families with responsive behavior and improved mobile consistency.</p>
+              <ul class="footer-more">
+                <li>Shipped responsive layouts with flex/grid and device-specific media tuning.</li>
+                <li>Improved mobile formatting consistency across season updates and new content.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section
+          id="menu-about"
+          class="mega-panel"
+          data-menu-panel="about"
+          role="region"
+          aria-label="About me"
+        >
+          <div class="mega-lines">
+            <p class="mega-line" style="--stagger: 0">Statistics & Data Science</p>
+            <p class="mega-line" style="--stagger: 1">University of Michigan</p>
+            <p class="mega-line" style="--stagger: 2">Builder + Analyst</p>
+          </div>
+
+          <div class="mega-footer">
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Education</p>
+              <p class="footer-meta">University of Michigan · May 2027</p>
+              <p class="footer-copy">B.S. in Statistics and Data Science. Coursework includes Data Structures, OOP, and Discrete Math.</p>
+              <ul class="footer-more">
+                <li>Expected graduation: May 2027.</li>
+                <li>Coursework spans algorithms, software engineering, and mathematical foundations.</li>
+              </ul>
+            </article>
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Skills</p>
+              <p class="footer-meta">Python, SQL, React, SwiftUI, Pandas, Matplotlib</p>
+              <p class="footer-copy">Tools include Git, Docker, Linux, Tableau, SQLite, APIs, and end-to-end data cleaning + visualization workflows.</p>
+              <ul class="footer-more">
+                <li>Languages: Python, SQL, C++, JavaScript, R.</li>
+                <li>Tooling: Git, Docker, Linux, Tableau, REST APIs, and JSON data pipelines.</li>
+              </ul>
+            </article>
+            <article class="footer-col" tabindex="0">
+              <p class="footer-title">Interests</p>
+              <p class="footer-meta">Rock Climbing · NBA Analytics · NFL</p>
+              <p class="footer-copy">I like combining technical rigor with practical execution and clear communication in product and research settings.</p>
+              <ul class="footer-more">
+                <li>Rock climbing mindset strongly influences how I approach iteration and consistency.</li>
+                <li>Interested in practical analytics that help teams decide and act faster.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
