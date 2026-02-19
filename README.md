@@ -2,6 +2,8 @@
 
 This project recreates the `design.cash.app` landing page structure and motion style with:
 
+Visit my site @ www.brunohg.dev
+
 - Scroll-driven infinite grid motion with inertia and wraparound tiling
 - Touch/drag fallback physics
 - Transparent-background climbing-hold artwork replacing the original grid imagery
