@@ -9,6 +9,13 @@ Visit my site @ www.brunohg.dev
 - Transparent-background climbing-hold artwork replacing the original grid imagery
 - High-contrast, keyboard-focus, and reduced-motion accessibility support
 
+## Hold artwork
+
+Tiles render at most 228 CSS pixels wide, so each hold in `assets/holds` is capped
+at 512px on its long edge and shipped as an AVIF with a same-named PNG fallback.
+Add new holds at that size: full-resolution source images cost far more decoded
+memory than they can ever show, and that is what makes the grid stutter.
+
 ## Run locally
 
 ```bash
