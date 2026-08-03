@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Cash App style landing with infinite climbing-hold grid and full-page dropdown overlays."
+      content="Bruno Garcia — Computer Science student at the University of Michigan and software engineer intern at Cambridge Mobile Telematics."
     />
     <title>Bruno Garcia</title>
     <link rel="icon" type="image/png" sizes="512x512" href="./assets/Default_Male_Mii.png" />
@@ -101,38 +101,38 @@
           aria-label="Experience"
         >
           <div class="mega-lines">
-            <p class="mega-line" style="--stagger: 0">Michigan Medicine</p>
-            <p class="mega-line" style="--stagger: 1">InRiva AI</p>
-            <p class="mega-line" style="--stagger: 2">Clinical Research</p>
-            <p class="mega-line" style="--stagger: 3">Data Products</p>
+            <p class="mega-line" style="--stagger: 0">Cambridge Mobile Telematics</p>
+            <p class="mega-line" style="--stagger: 1">Michigan Medicine</p>
+            <p class="mega-line" style="--stagger: 2">Focus</p>
           </div>
 
           <div class="mega-footer">
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">Data Analyst</p>
-              <p class="footer-meta">Michigan Medicine · May 2025 - Dec 2025</p>
-              <p class="footer-copy">Analyzed prescription data across 90M+ patients, built analysis-ready SQL/SAS cohorts, and produced publication-grade clinical tables and figures.</p>
+              <p class="footer-title">Software Engineer Intern</p>
+              <p class="footer-meta">Cambridge Mobile Telematics · Jun 2026 - Present</p>
+              <p class="footer-copy">Working on the telematics analytics platform, where I cache repeated table initialization every 6 hours to cut database calls by 35% and speed up dashboard and chart queries across large customer datasets.</p>
               <ul class="footer-more">
-                <li>Standardized 100K+ pharmacy records into validated patient-level cohort tables.</li>
-                <li>Tracked refill adherence and multi-year utilization trends for active studies.</li>
+                <li>Built and deployed MCP tools with Terraform so an AWS DevOps agent can query a time-series metrics database for anomalies, cutting root-cause analysis time by 25-50%.</li>
+                <li>Built a Python polling system for the analytics chart server that refreshes every minute, serves 1,000+ daily chart requests, and cuts repeated backend queries by ~40%.</li>
+                <li>Wrote an anomaly-detection algorithm with pandas and DuckDB that scans 400,000+ driver records across rolling 3-day windows to surface ride-failure patterns.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Software Engineer Intern</p>
-              <p class="footer-meta">InRiva AI · Jun 2025 - Aug 2025</p>
-              <p class="footer-copy">Processed CGM datasets for 50+ patients, built summary metrics pipelines, and delivered reusable reporting outputs for downstream clinical analysis.</p>
+              <p class="footer-meta">Michigan Medicine · May 2025 - Aug 2025</p>
+              <p class="footer-copy">Standardized 100K+ clinical and medication records from 4 source formats with a Python ETL pipeline that normalized patient IDs, drug names, dosage units, timestamps, and missing-value conventions.</p>
               <ul class="footer-more">
-                <li>Resolved timestamp gaps, invalid sensor points, and duplicate glucose readings.</li>
-                <li>Automated per-patient reporting outputs for analytics and clinical review flows.</li>
+                <li>Removed 10K+ duplicate records from overlapping exports using stable record IDs and idempotent PostgreSQL upserts with uniqueness constraints.</li>
+                <li>Flagged 1K+ missing or inconsistent records with temporal quality checks covering skipped study visits, incomplete dosing histories, and conflicting timestamps.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Focus</p>
-              <p class="footer-meta">Healthcare Data + Applied ML</p>
-              <p class="footer-copy">Strong preference for messy real-world data systems, robust cleaning pipelines, and communication-ready analytics for decision-making teams.</p>
+              <p class="footer-meta">Backend + Data Infrastructure</p>
+              <p class="footer-copy">I like messy real-world data systems: pipelines that stay correct under retries and duplicates, caching that makes slow queries fast, and tooling that shortens the path from a failure to its root cause.</p>
               <ul class="footer-more">
-                <li>Core stack: Python, SQL, Pandas, Matplotlib, and reproducible data workflows.</li>
-                <li>Interests: outcomes research, patient behavior modeling, and product analytics.</li>
+                <li>Core stack: Python, SQL, PostgreSQL, pandas, DuckDB, and REST APIs.</li>
+                <li>Interests: streaming pipelines, data quality checks, and developer tooling.</li>
               </ul>
             </article>
           </div>
@@ -146,37 +146,27 @@
           aria-label="Projects"
         >
           <div class="mega-lines">
-            <p class="mega-line" style="--stagger: 0">Grant Language Filter</p>
-            <p class="mega-line" style="--stagger: 1">COVID Cases Analyses</p>
-            <p class="mega-line" style="--stagger: 2">Summer Camp Website</p>
+            <p class="mega-line" style="--stagger: 0">PomodoroLB</p>
+            <p class="mega-line" style="--stagger: 1">GlucoFlow</p>
           </div>
 
           <div class="mega-footer">
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">Grant Language Filter</p>
-              <p class="footer-meta">Python · Jun 2025 - Aug 2025</p>
-              <p class="footer-copy">Scans 1,000+ page NIH proposals for high-risk terms across body text and embedded figures, outputting structured page-level reports.</p>
+              <p class="footer-title">PomodoroLB</p>
+              <p class="footer-meta">JavaScript, Node.js, Next.js, PostgreSQL, Supabase, Vercel</p>
+              <p class="footer-copy">A study app with a live Pomodoro leaderboard used by 20+ people who have logged 100+ sessions and 50+ hours, built on Supabase PostgreSQL with authentication, cached API queries, and time-windowed SQL rankings.</p>
               <ul class="footer-more">
-                <li>Combined PDF parsing + keyword matching over prose and figure regions.</li>
-                <li>Outputs flagged snippets with page numbers and contextual evidence.</li>
+                <li>Protected leaderboard accuracy by validating authenticated user IDs, blocking duplicate submissions, and enforcing a 50-minute cooldown between sessions.</li>
+                <li>Consolidated weekly, monthly, and all-time rankings into 3 reusable SQL queries instead of repeated backend logic.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">COVID Cases Analyses</p>
-              <p class="footer-meta">Python, SQLite, APIs · Feb 2025 - Apr 2025</p>
-              <p class="footer-copy">Built a normalized 50-state dataset linking case rates, elections, and demographics, with visualization pipelines for trend interpretation.</p>
+              <p class="footer-title">GlucoFlow</p>
+              <p class="footer-meta">Python, Apache Kafka, PySpark, Redis, PostgreSQL</p>
+              <p class="footer-copy">A Kafka and PySpark pipeline that standardizes 100K+ CGM readings across 4+ device formats, normalizing timestamps, glucose units, field names, and missing values into a unified PostgreSQL schema.</p>
               <ul class="footer-more">
-                <li>Integrated API and scraped sources into a clean county/state relational model.</li>
-                <li>Compared burden by vote share, income quartiles, and demographic composition.</li>
-              </ul>
-            </article>
-            <article class="footer-col" tabindex="0">
-              <p class="footer-title">Summer Camp Website</p>
-              <p class="footer-meta">HTML, CSS, JavaScript · Aug 2025</p>
-              <p class="footer-copy">Designed and deployed the official Camp AG site for 150+ campers/families with responsive behavior and improved mobile consistency.</p>
-              <ul class="footer-more">
-                <li>Shipped responsive layouts with flex/grid and device-specific media tuning.</li>
-                <li>Improved mobile formatting consistency across season updates and new content.</li>
+                <li>Eliminated 10K+ duplicate readings from retries and overlapping uploads using deterministic record IDs, atomic Redis checks, and PostgreSQL uniqueness constraints.</li>
+                <li>Turned cleaned readings into 14-day glucose summaries with time in range, sensor coverage, and data-quality metrics computed in PySpark.</li>
               </ul>
             </article>
           </div>
@@ -190,7 +180,7 @@
           aria-label="About me"
         >
           <div class="mega-lines">
-            <p class="mega-line" style="--stagger: 0">Statistics & Data Science</p>
+            <p class="mega-line" style="--stagger: 0">Computer Science</p>
             <p class="mega-line" style="--stagger: 1">University of Michigan</p>
             <p class="mega-line" style="--stagger: 2">Interests</p>
           </div>
@@ -198,29 +188,29 @@
           <div class="mega-footer">
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Education</p>
-              <p class="footer-meta">University of Michigan · May 2027</p>
-              <p class="footer-copy">B.S. in Statistics and Data Science. Coursework includes Data Structures, OOP, and Discrete Math.</p>
+              <p class="footer-meta">University of Michigan · May 2028</p>
+              <p class="footer-copy">B.S. in Computer Science, Ann Arbor, MI. Coursework includes Data Structures and Algorithms, Object Oriented Programming, and Discrete Math.</p>
               <ul class="footer-more">
-                <li>Expected graduation: May 2027.</li>
+                <li>Expected graduation: May 2028.</li>
                 <li>Coursework spans algorithms, software engineering, and mathematical foundations.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Skills</p>
-              <p class="footer-meta">Python, SQL, React, SwiftUI, Pandas, Matplotlib</p>
-              <p class="footer-copy">Tools include Git, Docker, Linux, Tableau, SQLite, APIs, and end-to-end data cleaning + visualization workflows.</p>
+              <p class="footer-meta">Python, SQL, C++, JavaScript, React, Pandas</p>
+              <p class="footer-copy">Comfortable across backend services, data pipelines, and the SQL and tooling that keep them honest.</p>
               <ul class="footer-more">
-                <li>Languages: Python, SQL, C++, JavaScript, R.</li>
-                <li>Tooling: Git, Docker, Linux, Tableau, REST APIs, and JSON data pipelines.</li>
+                <li>Languages: Python, SQL, C++, C, JavaScript, R, HTML/CSS.</li>
+                <li>Tools and libraries: Git, Docker, Linux, SQLite, REST APIs, JSON, BeautifulSoup, Tableau, Excel, React, pandas, Matplotlib, scikit-learn.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Interests</p>
-              <p class="footer-meta">Rock Climbing · NBA Analytics · NFL</p>
-              <p class="footer-copy">In my free time I like to rock climb, watch the Pistons, and love movies.</p>
+              <p class="footer-meta">Rock Climbing · Ping Pong · NBA</p>
+              <p class="footer-copy">Outside of work I climb, play ping pong, and watch too much basketball.</p>
               <ul class="footer-more">
                 <li>I climb v8!</li>
-                <li>My favorite movie at the moment is Limitless</li>
+                <li>Pistons fan, for better or worse.</li>
               </ul>
             </article>
           </div>
