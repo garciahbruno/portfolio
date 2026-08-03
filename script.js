@@ -375,6 +375,7 @@ function onWheel(event) {
   }
 
   event.preventDefault();
+  dismissScrollHint();
 
   const modeScale =
     event.deltaMode === WheelEvent.DOM_DELTA_LINE
@@ -438,6 +439,8 @@ function onPointerMove(event) {
     return;
   }
 
+  dismissScrollHint();
+
   const now = performance.now();
   const dt = Math.max(10, now - physics.lastDragTime);
   const dx = event.clientX - physics.lastDragX;
@@ -492,6 +495,7 @@ function onKeyDown(event) {
 
   if (handled) {
     event.preventDefault();
+    dismissScrollHint();
     clampVelocity();
   }
 }
@@ -520,6 +524,35 @@ reducedMotion.addEventListener("change", () => {
 buildGrid();
 renderGrid();
 requestAnimationFrame(animationFrame);
+
+const scrollHint = document.getElementById("scroll-hint");
+const scrollHintRevealDelay = 1500;
+const scrollHintExitDuration = 400;
+let scrollHintDismissed = false;
+let scrollHintRevealTimer = null;
+
+if (scrollHint) {
+  scrollHintRevealTimer = window.setTimeout(() => {
+    if (!scrollHintDismissed) {
+      scrollHint.classList.add("visible");
+    }
+  }, scrollHintRevealDelay);
+}
+
+// The hint is a one-time nudge: once the grid has moved at all it is gone for
+// the rest of the session, whether it had finished appearing or not.
+function dismissScrollHint() {
+  if (scrollHintDismissed || !scrollHint) {
+    return;
+  }
+
+  scrollHintDismissed = true;
+  window.clearTimeout(scrollHintRevealTimer);
+  scrollHint.classList.remove("visible");
+  scrollHint.classList.add("dismissed");
+
+  window.setTimeout(() => scrollHint.remove(), scrollHintExitDuration + 100);
+}
 
 const menuOverlay = document.getElementById("menu-overlay");
 const menuTriggers = Array.from(document.querySelectorAll(".menu-trigger"));

@@ -206,6 +206,63 @@ a {
   transform: translateZ(18px);
 }
 
+.scroll-hint {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(1.4rem, 4.5vh, 2.6rem);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  transform: translate3d(-50%, 0, 0);
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease;
+}
+
+.scroll-hint.visible {
+  opacity: 1;
+}
+
+.scroll-hint.dismissed {
+  opacity: 0;
+  transform: translate3d(-50%, 16px, 0);
+}
+
+.scroll-hint-label {
+  margin: 0;
+  font-size: 1.01rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.scroll-hint-arrow {
+  display: block;
+  width: 1.6rem;
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: scroll-hint-bob 1.9s ease-in-out infinite;
+}
+
+@keyframes scroll-hint-bob {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
+}
+
 .edge-vignette {
   position: fixed;
   inset: 0;
@@ -623,7 +680,12 @@ body.overlay-open .icon-link:hover {
   .icon-link,
   .menu-overlay,
   .mega-line,
-  .line-detail-popover {
+  .line-detail-popover,
+  .scroll-hint {
     transition: none !important;
+  }
+
+  .scroll-hint-arrow {
+    animation: none !important;
   }
 }
