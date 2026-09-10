@@ -481,6 +481,12 @@ a {
   line-height: 1.35;
 }
 
+.detail-meta:empty,
+.detail-copy:empty,
+.detail-points:empty {
+  display: none;
+}
+
 .detail-points {
   margin: 0.78rem 0 0;
   padding-left: 1.12rem;

@@ -101,38 +101,30 @@
           aria-label="Experience"
         >
           <div class="mega-lines">
-            <p class="mega-line" style="--stagger: 0">Michigan Medicine</p>
-            <p class="mega-line" style="--stagger: 1">InRiva AI</p>
-            <p class="mega-line" style="--stagger: 2">Clinical Research</p>
-            <p class="mega-line" style="--stagger: 3">Data Products</p>
+            <p class="mega-line" style="--stagger: 0">Cambridge Mobile Telematics</p>
+            <p class="mega-line" style="--stagger: 1">Michigan Medicine</p>
           </div>
 
           <div class="mega-footer">
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">Data Analyst</p>
-              <p class="footer-meta">Michigan Medicine · May 2025 - Dec 2025</p>
-              <p class="footer-copy">Analyzed prescription data across 90M+ patients, built analysis-ready SQL/SAS cohorts, and produced publication-grade clinical tables and figures.</p>
+              <p class="footer-title">Software Engineer Intern</p>
+              <p class="footer-meta">Cambridge Mobile Telematics · June 2026 – August 2026 · Cambridge, MA</p>
+              <p class="footer-copy"></p>
               <ul class="footer-more">
-                <li>Standardized 100K+ pharmacy records into validated patient-level cohort tables.</li>
-                <li>Tracked refill adherence and multi-year utilization trends for active studies.</li>
+                <li>Improved performance for the telematics analytics API by caching repeated table initialization for 6 hours, ∼35% fewer database calls and faster dashboard and chart queries across large customer datasets.</li>
+                <li>Built and deployed MCP tools with Terraform that let an AWS DevOps agent query a time-series metrics database for anomalies, reducing root-cause analysis time by ∼80% for ride failures and device-update issues.</li>
+                <li>Built a lightweight Python polling system for an analytics chart server that refreshed data every minute, served 1,000+ daily chart requests, and reduced repeated backend requests substantially reducing computational costs.</li>
+                <li>Built a simple rule based anomaly-detection algorithm in Python using pandas and DuckDB to scan 400,000+ driver records across rolling 3-day windows and surface ride-failure patterns for further investigation.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Software Engineer Intern</p>
-              <p class="footer-meta">InRiva AI · Jun 2025 - Aug 2025</p>
-              <p class="footer-copy">Processed CGM datasets for 50+ patients, built summary metrics pipelines, and delivered reusable reporting outputs for downstream clinical analysis.</p>
+              <p class="footer-meta">Michigan Medicine · May 2025 – Aug 2025 · Ann Arbor, MI</p>
+              <p class="footer-copy"></p>
               <ul class="footer-more">
-                <li>Resolved timestamp gaps, invalid sensor points, and duplicate glucose readings.</li>
-                <li>Automated per-patient reporting outputs for analytics and clinical review flows.</li>
-              </ul>
-            </article>
-            <article class="footer-col" tabindex="0">
-              <p class="footer-title">Focus</p>
-              <p class="footer-meta">Healthcare Data + Applied ML</p>
-              <p class="footer-copy">Strong preference for messy real-world data systems, robust cleaning pipelines, and communication-ready analytics for decision-making teams.</p>
-              <ul class="footer-more">
-                <li>Core stack: Python, SQL, Pandas, Matplotlib, and reproducible data workflows.</li>
-                <li>Interests: outcomes research, patient behavior modeling, and product analytics.</li>
+                <li>Built an internal pharmaceutical analytics platform with Python, FastAPI, and PostgreSQL, allowing researchers to explore dispensing trends, and filter results without writing SQL or manually exporting data for analysis.</li>
+                <li>Reduced dashboard load time by 60% across 500K+ dispensing records using PostgreSQL indexes, and Redis caching, cutting repeated database work and making medication and cohort views faster to use.</li>
+                <li>Improved platform reliability with FastAPI validation, PostgreSQL and access controls, catching bad dispensing records, restricting study access, and reducing errors researchers encountered using the internal analytics platform.</li>
               </ul>
             </article>
           </div>
@@ -146,37 +138,37 @@
           aria-label="Projects"
         >
           <div class="mega-lines">
-            <p class="mega-line" style="--stagger: 0">Grant Language Filter</p>
-            <p class="mega-line" style="--stagger: 1">COVID Cases Analyses</p>
-            <p class="mega-line" style="--stagger: 2">Summer Camp Website</p>
+            <p class="mega-line" style="--stagger: 0">PomodoroLB</p>
+            <p class="mega-line" style="--stagger: 1">Mini Git</p>
+            <p class="mega-line" style="--stagger: 2">Fortnite Item Tracker</p>
           </div>
 
           <div class="mega-footer">
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">Grant Language Filter</p>
-              <p class="footer-meta">Python · Jun 2025 - Aug 2025</p>
-              <p class="footer-copy">Scans 1,000+ page NIH proposals for high-risk terms across body text and embedded figures, outputting structured page-level reports.</p>
+              <p class="footer-title">PomodoroLB</p>
+              <p class="footer-meta">JavaScript, Node.js, Next.js, PostgreSQL, Supabase, Vercel</p>
+              <p class="footer-copy"></p>
               <ul class="footer-more">
-                <li>Combined PDF parsing + keyword matching over prose and figure regions.</li>
-                <li>Outputs flagged snippets with page numbers and contextual evidence.</li>
+                <li>Built a Next.js Pomodoro app where users could track study sessions and compare study time through weekly, monthly, and all-time leaderboards, reaching 20+ users and 50+ hours logged.</li>
+                <li>Added user accounts and session tracking with Supabase and PostgreSQL, ensuring completed study sessions were recorded correctly and reflected in leaderboard rankings.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">COVID Cases Analyses</p>
-              <p class="footer-meta">Python, SQLite, APIs · Feb 2025 - Apr 2025</p>
-              <p class="footer-copy">Built a normalized 50-state dataset linking case rates, elections, and demographics, with visualization pipelines for trend interpretation.</p>
+              <p class="footer-title">Mini Git</p>
+              <p class="footer-meta">C++, CMake, OpenSSL, zlib, GoogleTest</p>
+              <p class="footer-copy"></p>
               <ul class="footer-more">
-                <li>Integrated API and scraped sources into a clean county/state relational model.</li>
-                <li>Compared burden by vote share, income quartiles, and demographic composition.</li>
+                <li>Built a Git-compatible version control system in C++, implementing content-addressed object storage, SHA-1 hashing, zlib compression, staging, commits, branching, and working-tree restoration.</li>
+                <li>Engineered Git-style blob, tree, and commit objects with filesystem-backed references and DAG traversal, supporting init, add, commit, status, log, branch, checkout, and diff.</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">Summer Camp Website</p>
-              <p class="footer-meta">HTML, CSS, JavaScript · Aug 2025</p>
-              <p class="footer-copy">Designed and deployed the official Camp AG site for 150+ campers/families with responsive behavior and improved mobile consistency.</p>
+              <p class="footer-title">Fortnite Item Tracker</p>
+              <p class="footer-meta">Golang, Gin, PostgreSQL, Docker, Discord API</p>
+              <p class="footer-copy"></p>
               <ul class="footer-more">
-                <li>Shipped responsive layouts with flex/grid and device-specific media tuning.</li>
-                <li>Improved mobile formatting consistency across season updates and new content.</li>
+                <li>Built and deployed a Discord bot and web app that alerts users when tracked cosmetics become available in the Fortnite item shop.</li>
+                <li>Engineered secure authentication using Discord OAuth2 and JSON Web Tokens for session management.</li>
               </ul>
             </article>
           </div>
@@ -190,38 +182,33 @@
           aria-label="About me"
         >
           <div class="mega-lines">
-            <p class="mega-line" style="--stagger: 0">Statistics & Data Science</p>
-            <p class="mega-line" style="--stagger: 1">University of Michigan</p>
+            <p class="mega-line" style="--stagger: 0">Education</p>
+            <p class="mega-line" style="--stagger: 1">Skills</p>
             <p class="mega-line" style="--stagger: 2">Interests</p>
           </div>
 
           <div class="mega-footer">
             <article class="footer-col" tabindex="0">
-              <p class="footer-title">Education</p>
-              <p class="footer-meta">University of Michigan · May 2027</p>
-              <p class="footer-copy">B.S. in Statistics and Data Science. Coursework includes Data Structures, OOP, and Discrete Math.</p>
-              <ul class="footer-more">
-                <li>Expected graduation: May 2027.</li>
-                <li>Coursework spans algorithms, software engineering, and mathematical foundations.</li>
-              </ul>
+              <p class="footer-title">Bachelor of Science, Computer Science</p>
+              <p class="footer-meta">University of Michigan, Ann Arbor, MI · May 2028</p>
+              <p class="footer-copy">Coursework: Data Structures and Algorithms, Object Oriented Programming, Discrete Math, Web Systems</p>
+              <ul class="footer-more"></ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Skills</p>
-              <p class="footer-meta">Python, SQL, React, SwiftUI, Pandas, Matplotlib</p>
-              <p class="footer-copy">Tools include Git, Docker, Linux, Tableau, SQLite, APIs, and end-to-end data cleaning + visualization workflows.</p>
+              <p class="footer-meta"></p>
+              <p class="footer-copy"></p>
               <ul class="footer-more">
-                <li>Languages: Python, SQL, C++, JavaScript, R.</li>
-                <li>Tooling: Git, Docker, Linux, Tableau, REST APIs, and JSON data pipelines.</li>
+                <li>Languages: Python, HTML/CSS, SQL, C++, C#, R, JavaScript</li>
+                <li>Tools: Git, SQLite, Docker, BeautifulSoup, REST APIs, JSON, Jenkins, Terraform</li>
+                <li>Libraries: Pandas, scikit-learn</li>
               </ul>
             </article>
             <article class="footer-col" tabindex="0">
               <p class="footer-title">Interests</p>
-              <p class="footer-meta">Rock Climbing · NBA Analytics · NFL</p>
-              <p class="footer-copy">In my free time I like to rock climb, watch the Pistons, and love movies.</p>
-              <ul class="footer-more">
-                <li>I climb v8!</li>
-                <li>My favorite movie at the moment is Limitless</li>
-              </ul>
+              <p class="footer-meta"></p>
+              <p class="footer-copy">Rock Climbing, Ping Pong, NBA</p>
+              <ul class="footer-more"></ul>
             </article>
           </div>
         </section>
