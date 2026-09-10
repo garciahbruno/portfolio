@@ -6,19 +6,14 @@ if (!gridRoot) {
   throw new Error("Grid root not found.");
 }
 
-const resolvedImages = HOLD_IMAGES.filter((item) => item && item.avif && item.png).map((item) => {
-  const avif = item.avif.replaceAll('"', "\\\"");
-  const png = item.png.replaceAll('"', "\\\"");
-
-  return {
-    pngValue: `url("${png}")`,
-    imageSetValue: `image-set(url("${avif}") type("image/avif"), url("${png}") type("image/png"))`,
-    hueBin: Number.isFinite(item.hueBin) ? positiveMod(Math.round(item.hueBin), 12) : 0,
-    saturation: Number.isFinite(item.saturation) ? clamp(item.saturation, 0, 1) : 0.5,
-    scale: Number.isFinite(item.scale) ? clamp(item.scale, 0.48, 1.12) : 1,
-    quality: Number.isFinite(item.quality) ? clamp(item.quality, 0, 1) : 0.75,
-  };
-});
+const resolvedImages = HOLD_IMAGES.filter((item) => item && item.src).map((item) => ({
+  src: item.src,
+  srcEscaped: item.src.replaceAll('"', "\\\""),
+  hueBin: Number.isFinite(item.hueBin) ? positiveMod(Math.round(item.hueBin), 12) : 0,
+  saturation: Number.isFinite(item.saturation) ? clamp(item.saturation, 0, 1) : 0.5,
+  scale: Number.isFinite(item.scale) ? clamp(item.scale, 0.48, 1.12) : 1,
+  quality: Number.isFinite(item.quality) ? clamp(item.quality, 0, 1) : 0.75,
+}));
 
 if (resolvedImages.length === 0) {
   throw new Error("No hold images configured. Populate hold-images.js.");
@@ -42,29 +37,22 @@ const physics = {
 
 const tuning = {
   gap: 28,
-  overscan: 1,
+  overscan: 3,
   friction: 0.905,
-  maxVelocity: 63,
-  wheelX: 0.675,
-  wheelY: 1.125,
-  // Trackpads report a pixel or two of sideways noise during a vertical swipe.
-  wheelDeadzone: 2,
+  maxVelocity: 56,
+  wheelX: 0.16,
+  wheelY: 1.0,
+  wheelDrift: 0.04,
   keyNudge: 10,
 };
-
-// Below this the grid is treated as stopped, so the loop can stop rendering.
-const restVelocity = 0.02;
 
 let overlayOpen = false;
 let tiles = [];
 let tileSize = 228;
 let pitchX = 256;
 let pitchY = 256;
-let needsRender = true;
-let wasMoving = false;
 
 const assignmentCache = new Map();
-const assignmentCacheLimit = 20000;
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -79,13 +67,8 @@ function hash2(x, y) {
   return result - Math.floor(result);
 }
 
-// Numeric keys avoid allocating a string per tile per frame. The offset keeps
-// negative coordinates positive; the stride keeps columns and rows from colliding.
-const keyOrigin = 1 << 20;
-const keyStride = 1 << 21;
-
 function keyFor(col, row) {
-  return (col + keyOrigin) * keyStride + (row + keyOrigin);
+  return `${col},${row}`;
 }
 
 function isNeutral(hold) {
@@ -151,42 +134,33 @@ function selectImageId(worldCol, worldRow, leftId, topId) {
   return bestIds[positiveMod(tieSeed, bestIds.length)];
 }
 
-function resolveImageId(worldCol, worldRow) {
+function resolveImageId(worldCol, worldRow, frameAssignments) {
   const key = keyFor(worldCol, worldRow);
   const cachedId = assignmentCache.get(key);
 
-  if (cachedId !== undefined) {
+  if (Number.isInteger(cachedId)) {
+    frameAssignments.set(key, cachedId);
     return cachedId;
   }
 
-  const leftId = assignmentCache.get(keyFor(worldCol - 1, worldRow));
-  const topId = assignmentCache.get(keyFor(worldCol, worldRow - 1));
-  const nextId = selectImageId(worldCol, worldRow, leftId, topId);
+  const leftKey = keyFor(worldCol - 1, worldRow);
+  const topKey = keyFor(worldCol, worldRow - 1);
 
+  const leftId =
+    frameAssignments.get(leftKey) !== undefined
+      ? frameAssignments.get(leftKey)
+      : assignmentCache.get(leftKey);
+
+  const topId =
+    frameAssignments.get(topKey) !== undefined
+      ? frameAssignments.get(topKey)
+      : assignmentCache.get(topKey);
+
+  const nextId = selectImageId(worldCol, worldRow, leftId, topId);
   assignmentCache.set(key, nextId);
+  frameAssignments.set(key, nextId);
 
   return nextId;
-}
-
-// Cells are cached forever otherwise, so a long session leaks one entry per
-// cell visited. Drop the oldest quarter once the cache gets large.
-function trimAssignmentCache() {
-  if (assignmentCache.size <= assignmentCacheLimit) {
-    return;
-  }
-
-  const target = Math.floor(assignmentCacheLimit * 0.75);
-  const keys = assignmentCache.keys();
-
-  while (assignmentCache.size > target) {
-    const next = keys.next();
-
-    if (next.done) {
-      break;
-    }
-
-    assignmentCache.delete(next.value);
-  }
 }
 
 function readTileSize() {
@@ -199,12 +173,8 @@ function readTileSize() {
 function buildGrid() {
   readTileSize();
 
-  // The grid is inset past the viewport on every side, so measure the element
-  // rather than the window or the outer rows and columns come up short.
-  const gridWidth = gridRoot.clientWidth || window.innerWidth;
-  const gridHeight = gridRoot.clientHeight || window.innerHeight;
-  const visibleCols = Math.ceil(gridWidth / pitchX);
-  const visibleRows = Math.ceil(gridHeight / pitchY);
+  const visibleCols = Math.ceil(window.innerWidth / pitchX);
+  const visibleRows = Math.ceil(window.innerHeight / pitchY);
 
   gridRoot.replaceChildren();
   tiles = [];
@@ -254,15 +224,12 @@ function clampVelocity() {
   physics.vy = clamp(physics.vy, -tuning.maxVelocity, tuning.maxVelocity);
 }
 
-function setImageForTile(tile, worldCol, worldRow) {
-  const imageId = resolveImageId(worldCol, worldRow);
+function setImageForTile(tile, worldCol, worldRow, frameAssignments) {
+  const imageId = resolveImageId(worldCol, worldRow, frameAssignments);
   const hold = resolvedImages[imageId];
 
   if (imageId !== tile.imageId) {
-    // The PNG lands first so anything without image-set() or AVIF still gets an
-    // image; the second assignment is discarded when either is unsupported.
-    tile.media.style.backgroundImage = hold.pngValue;
-    tile.media.style.backgroundImage = hold.imageSetValue;
+    tile.media.style.backgroundImage = `url("${hold.srcEscaped}")`;
     tile.imageId = imageId;
   }
 
@@ -282,6 +249,8 @@ function renderGrid() {
   const range = Math.max(window.innerWidth, window.innerHeight);
   const velocitySpin = clamp(physics.vx * 0.012 + physics.vy * 0.009, -7.5, 7.5);
 
+  const frameAssignments = new Map();
+
   for (let i = 0; i < tiles.length; i += 1) {
     const tile = tiles[i];
     const x = tile.baseCol * pitchX - fracX;
@@ -289,7 +258,7 @@ function renderGrid() {
     const worldCol = tile.baseCol + colShift;
     const worldRow = tile.baseRow + rowShift;
 
-    setImageForTile(tile, worldCol, worldRow);
+    setImageForTile(tile, worldCol, worldRow, frameAssignments);
 
     const itemCenterX = x + tileSize * 0.5;
     const itemCenterY = y + tileSize * 0.5;
@@ -316,56 +285,36 @@ function renderGrid() {
       )}deg) rotateY(${tiltY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
     }
   }
-
-  trimAssignmentCache();
 }
 
 function animationFrame(now) {
   const dt = clamp((now - physics.frameTime) / 16.6667, 0.2, 2.7);
   physics.frameTime = now;
 
-  const moving =
-    physics.dragging ||
-    Math.abs(physics.vx) > restVelocity ||
-    Math.abs(physics.vy) > restVelocity;
-
-  if (moving) {
-    const damp = overlayOpen
-      ? Math.pow(0.65, dt)
-      : Math.pow(tuning.friction, dt);
-
-    // Reduced motion moves the grid by position rather than velocity, so the
-    // only velocity left to damp there comes from key nudges. Damping it too
-    // keeps those from coasting forever and holding the loop awake.
-    if (overlayOpen || !physics.dragging) {
+  if (overlayOpen) {
+    if (Math.abs(physics.vx) > 0.02 || Math.abs(physics.vy) > 0.02) {
+      const damp = Math.pow(0.65, dt);
       physics.vx *= damp;
       physics.vy *= damp;
+      physics.x += physics.vx * dt;
+      physics.y += physics.vy * dt;
+      renderGrid();
     }
 
-    physics.x += physics.vx * dt;
-    physics.y += physics.vy * dt;
-
-    renderGrid();
-    needsRender = false;
-    wasMoving = true;
     requestAnimationFrame(animationFrame);
     return;
   }
 
-  // Settle on the frame the grid comes to rest so the velocity-driven spin
-  // resolves, then go quiet until something actually changes.
-  if (wasMoving) {
-    physics.vx = 0;
-    physics.vy = 0;
-    needsRender = true;
-    wasMoving = false;
+  if (!reducedMotion.matches && !physics.dragging) {
+    const damp = Math.pow(tuning.friction, dt);
+    physics.vx *= damp;
+    physics.vy *= damp;
   }
 
-  if (needsRender) {
-    renderGrid();
-    needsRender = false;
-  }
+  physics.x += physics.vx * dt;
+  physics.y += physics.vy * dt;
 
+  renderGrid();
   requestAnimationFrame(animationFrame);
 }
 
@@ -383,21 +332,20 @@ function onWheel(event) {
         ? window.innerHeight
         : 1;
 
-  const rawX = event.deltaX * modeScale;
-  const deltaX = Math.abs(rawX) < tuning.wheelDeadzone ? 0 : rawX;
+  const deltaX = event.deltaX * modeScale;
   const deltaY = event.deltaY * modeScale;
 
-  const verticalIntent = event.shiftKey ? 0 : deltaY;
-  const horizontalIntent = event.shiftKey ? deltaX + deltaY : deltaX;
+  const verticalIntent = deltaY;
+  const horizontalIntent = deltaX + (event.shiftKey ? deltaY : 0);
 
   if (reducedMotion.matches) {
-    physics.x += horizontalIntent * tuning.wheelX;
+    physics.x += horizontalIntent * tuning.wheelX + verticalIntent * tuning.wheelDrift;
     physics.y += verticalIntent * tuning.wheelY;
-    needsRender = true;
+    renderGrid();
     return;
   }
 
-  physics.vx += horizontalIntent * tuning.wheelX;
+  physics.vx += horizontalIntent * tuning.wheelX + verticalIntent * tuning.wheelDrift;
   physics.vy += verticalIntent * tuning.wheelY;
   clampVelocity();
 }
@@ -423,14 +371,6 @@ function onPointerDown(event) {
 }
 
 function onPointerMove(event) {
-  if (
-    !overlayOpen &&
-    (event.clientX !== physics.pointerX || event.clientY !== physics.pointerY)
-  ) {
-    // The per-tile tilt tracks the cursor, so an idle grid still has to redraw.
-    needsRender = true;
-  }
-
   physics.pointerX = event.clientX;
   physics.pointerY = event.clientY;
 
@@ -498,7 +438,7 @@ function onKeyDown(event) {
 
 function onResize() {
   buildGrid();
-  needsRender = true;
+  renderGrid();
 }
 
 window.addEventListener("wheel", onWheel, { passive: false });
