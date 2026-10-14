@@ -1,13 +1,6 @@
-# Cash App Design Landing Rebuild (Climbing Holds Edition)
+# Bruno Garcia
 
-This project recreates the `design.cash.app` landing page structure and motion style with:
-
-Visit my site @ www.brunohg.dev
-
-- Scroll-driven infinite grid motion with inertia and wraparound tiling
-- Touch/drag fallback physics
-- Transparent-background climbing-hold artwork replacing the original grid imagery
-- High-contrast, keyboard-focus, and reduced-motion accessibility support
+A minimal personal site for Bruno Garcia, a computer science student at the University of Michigan.
 
 ## Run locally
 
@@ -19,7 +12,4 @@ Then open `http://localhost:5173`.
 
 ## Deploy
 
-This is a static site. Deploy the project root directly on platforms such as Vercel, Netlify, Cloudflare Pages, or GitHub Pages.
-
-- Build command: none
-- Output directory: `.`
+This is a static site. Deploy the project root directly on a static hosting platform. The resume is available at `assets/BrunoGarcia_Resume.pdf`.
